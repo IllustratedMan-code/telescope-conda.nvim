@@ -81,3 +81,5 @@ M.conda = function(opts)
 
   }):find()
 end
+
+return M
