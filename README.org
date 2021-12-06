@@ -1,0 +1,2 @@
+* telescope-conda.nvim
+  An extension for [[https://github.com/nvim-telescope/telescope.nvim][telescope.nvim]]
