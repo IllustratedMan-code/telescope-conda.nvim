@@ -81,5 +81,3 @@ M.conda = function(opts)
 
   }):find()
 end
--- to execute the function
-conda_list()
