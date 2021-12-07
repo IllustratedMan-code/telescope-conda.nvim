@@ -28,5 +28,9 @@ require('telescope').setup {
 #+begin_src sh
 conda config --set auto_activate_base false
 #+end_src
-   This is due to the fact that =:terminal= will run the bashrc config, which alters the =$PATH= variable when enabling conda, which messes with the altercations that this package does to the neovim path. 
-
+   This is due to the fact that =:terminal= will run the bashrc config, which alters the =$PATH= variable when enabling conda, which messes with the altercations that this package does to the neovim path.
+* Usage
+The picker
+#+begin_src lua
+require'telescope'.extensions.conda.conda{}
+#+end_src
