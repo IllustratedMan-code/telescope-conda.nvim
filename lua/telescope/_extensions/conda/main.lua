@@ -74,7 +74,6 @@ M.conda = function(opts)
 					vim.env.PATH = string.gsub(
 						vim.env.PATH, current_anaconda, next_anaconda
 					)
-					print(vim.inspect(selection))
 				end
 			)
 		return true
