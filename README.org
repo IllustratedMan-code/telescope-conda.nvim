@@ -4,28 +4,28 @@
 * Install
 ** Packer
    add to require statement in use telescope
-   #+begin_src lua
-  	use {'nvim-telescope/telescope.nvim',
-		  requires = {'nvim-lua/plenary.nvim',
-					  'IllustratedMan-code/telescope-conda.nvim'
-					  }}
-   #+end_src
+#+begin_src lua
+use {'nvim-telescope/telescope.nvim',
+		requires = {'nvim-lua/plenary.nvim',
+					'IllustratedMan-code/telescope-conda.nvim'
+					}}
+#+end_src
 * Setup
 ** Anaconda Path
    Set the path to the directory the Anaconda python distribution is located in. Default is =$HOME=. So if you installed Anaconda the normal way, this should not have to to be changed.
-   #+begin_src lua
-   require('telescope').setup {
-  	extensions = {
-    	conda = {
-      		home = "/path/to/directory/"
-	}
-   #+end_src
+#+begin_src lua
+require('telescope').setup {
+extensions = {
+	conda = {
+		home = "/path/to/directory/"
+}
+#+end_src
 ** Configure Anaconda
    By default, setting conda environments will work with the =:!= bang commands and non-interactive terminals.
 
    If you want conda evironments to be set for /interactive/ terminals, such as when running =:terminal=, or using a repl package like =kassio/neoterm=, you will need to disable automatic activation of conda environments using this command.
-   #+begin_src sh
-   conda config --set auto_activate_base false
-   #+end_src
+#+begin_src sh
+conda config --set auto_activate_base false
+#+end_src
    This is due to the fact that =:terminal= will run the bashrc config, which alters the =$PATH= variable when enabling conda, which messes with the altercations that this package does to the neovim path. 
 
