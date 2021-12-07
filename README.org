@@ -5,7 +5,11 @@
 ** Packer
    add to require statement in use telescope
    #+begin_src lua
-  	use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim', 'IllustratedMan-code/telescope-conda.nvim'}}
+  	use {'nvim-telescope/telescope.nvim',
+			requires = {'nvim-lua/plenary.nvim',
+						'IllustratedMan-code/telescope-conda.nvim'
+						}
+		}
    #+end_src
 * Setup
 ** Anaconda Path
