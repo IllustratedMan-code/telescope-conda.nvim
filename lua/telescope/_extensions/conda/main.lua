@@ -50,7 +50,7 @@ M.conda = function(opts)
 
   	pickers.new(opts, {
     	prompt_title = "Select an Environments",
-		results_title = "Conda Environments"
+		results_title = "Conda Environments",
     	finder = conda_finder(),
     	sorter = conf.generic_sorter(opts),
 
