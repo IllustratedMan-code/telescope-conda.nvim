@@ -16,10 +16,10 @@ use {'nvim-telescope/telescope.nvim',
    Set the path to the directory the Anaconda python distribution is located in. Default is =$HOME=. So if you installed Anaconda the normal way, this should not have to to be changed.
 #+begin_src lua
 require('telescope').setup {
-extensions = {
-	conda = {
-		home = "/path/to/directory/"
-}}}
+	extensions = {
+		conda = {home = "/path/to/directory/"}
+			}
+}
 #+end_src
 ** Configure Anaconda
    By default, setting conda environments will work with the =:!= bang commands and non-interactive terminals.
