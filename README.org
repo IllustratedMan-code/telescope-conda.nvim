@@ -6,9 +6,10 @@
    add to require statement in use telescope
 #+begin_src lua
 use {'nvim-telescope/telescope.nvim',
-	 requires = {'nvim-lua/plenary.nvim',
-				 'IllustratedMan-code/telescope-conda.nvim'
-			}}
+	 requires = {
+        'nvim-lua/plenary.nvim',
+		'IllustratedMan-code/telescope-conda.nvim'
+		}}
 #+end_src
 * Setup
 ** Anaconda Path
@@ -18,7 +19,7 @@ require('telescope').setup {
 extensions = {
 	conda = {
 		home = "/path/to/directory/"
-}
+}}}
 #+end_src
 ** Configure Anaconda
    By default, setting conda environments will work with the =:!= bang commands and non-interactive terminals.
