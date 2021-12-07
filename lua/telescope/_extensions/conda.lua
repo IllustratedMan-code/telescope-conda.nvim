@@ -7,5 +7,5 @@ end
 
 return telescope.register_extension{
   setup = main.setup,
-  exports = { project = main.conda }
+  exports = { conda = main.conda }
 }
