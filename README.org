@@ -1,6 +1,6 @@
 * telescope-conda.nvim
   An extension for [[https://github.com/nvim-telescope/telescope.nvim][telescope.nvim]]
-  that allows the user to switch [[https://www.anaconda.com/][Anaconda]] Environments inside Neovim!
+  that allows the user to switch [[https://www.anaconda.com/][Anaconda]] and [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]] Environments inside Neovim!
 * Install
 ** Packer
    add to require statement in use telescope
@@ -12,8 +12,8 @@ use {'nvim-telescope/telescope.nvim',
 		}}
 #+end_src
 * Setup
-** Anaconda Path
-   Set the path to the directory the Anaconda python distribution is located in. Default is =$HOME=. So if you installed Anaconda the normal way, this should not have to to be changed.
+** Anaconda or Miniconda Path
+   Set the path to the directory the Anaconda python distribution is located in. Default is =$HOME/anaconda3= or =$HOME/miniconda=. So if you installed Anaconda the normal way, this should not have to to be changed.
 #+begin_src lua
 require('telescope').setup {
 	extensions = {
