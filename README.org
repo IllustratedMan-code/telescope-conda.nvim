@@ -13,7 +13,7 @@ use {'nvim-telescope/telescope.nvim',
 #+end_src
 * Setup
 ** Anaconda or Miniconda Path
-   Set the path to the directory the Anaconda python distribution is located in. Default is =$HOME/anaconda3= or =$HOME/miniconda=. So if you installed Anaconda the normal way, this should not have to to be changed.
+   Set the path to the directory the Anaconda python distribution is located in. Default is =$HOME/anaconda3= or =$HOME/miniconda3=. So if you installed Anaconda the normal way, this should not have to to be changed.
 #+begin_src lua
 require('telescope').setup {
 	extensions = {
