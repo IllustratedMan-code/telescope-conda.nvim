@@ -74,7 +74,7 @@ M.conda = function(opts)
 		attach_mappings = function(prompt_bufnr, map)
 			actions.select_default:replace(function()
 				env_to_bin = function(env)
-					if env == "base" then
+					if env == "base" or env == nil then
 						return conda_path .. "/bin"
 					else
 						return conda_env_path .. "/" .. env .. "/bin"
