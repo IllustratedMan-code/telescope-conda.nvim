@@ -71,6 +71,7 @@ M.conda = function(opts)
 		finder = conda_finder(),
 		sorter = conf.generic_sorter(opts),
 
+		-- TODO: There seems to be a bug if you immediately select the suggestion without moving first, that this one is not written into 
 		attach_mappings = function(prompt_bufnr, map)
 			actions.select_default:replace(function()
 				env_to_bin = function(env)
@@ -82,13 +83,14 @@ M.conda = function(opts)
 				end
 				actions.close(prompt_bufnr)
 				local selection = action_state.get_selected_entry()
+				print(vim.inspect(selection))
 				local current_env = vim.env.CONDA_DEFAULT_ENV
 				local next_env = selection["display"]
 				vim.env.CONDA_DEFAULT_ENV = next_env
 				current_anaconda = env_to_bin(current_env)
 				next_anaconda = env_to_bin(next_env)
 				-- remove it and append it separately. Otherwise might have issues when no env in path in the beginning
-				vim.env.PATH = string.gsub(vim.env.PATH, current_anaconda, '')
+				vim.env.PATH = string.gsub(vim.env.PATH, current_anaconda .. '', '')
 				vim.env.PATH = current_anaconda .. ':' .. vim.env.PATH
 			end)
 			return true
