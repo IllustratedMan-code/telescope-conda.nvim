@@ -78,6 +78,8 @@ M.conda = function(opts)
 					if env_name == "base" or env_name == nil then
 						return conda_path .. "/bin"
 					else
+						print(env_name)
+						print(env_path)
 						if env_path == nil then
 						    return conda_env_path .. '/' .. env_name .. '/bin'
                         else
