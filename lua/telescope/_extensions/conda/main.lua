@@ -99,16 +99,17 @@ M.conda = function(opts)
 				local next_env_name = selection["display"]
 				local next_env_path = selection['value']
 				vim.env.CONDA_DEFAULT_ENV = next_env_name
+				
+				current_conda = env_to_bin(current_env_name, current_env_path)
+				next_conda = env_to_bin(next_env_name, next_env_path)
 				-- remove '/bin' for prefix
-				vim.env.CONDA_PREFIX = next_env_path:sub(1, -5)
-				vim.env.CONDA_PYTHON_EXE = next_env_path .. '/python'
+				vim.env.CONDA_PREFIX = next_conda:sub(1, -5)
+				vim.env.CONDA_PYTHON_EXE = next_conda .. '/python'
 				vim.env.CONDA_PROMPT_MODIFIER = '(' .. next_env_name .. ')'
-				current_anaconda = env_to_bin(current_env_name, current_env_path)
-				next_anaconda = env_to_bin(next_env_name, next_env_path)
 
 				-- remove it and append it separately. Otherwise might have issues when no env in path in the beginning
-				vim.env.PATH = string.gsub(vim.env.PATH, current_anaconda .. '', '')
-				vim.env.PATH = next_anaconda .. ':' .. vim.env.PATH
+				vim.env.PATH = string.gsub(vim.env.PATH, current_conda .. '', '')
+				vim.env.PATH = next_conda .. ':' .. vim.env.PATH
 			end)
 			return true
 		end,
