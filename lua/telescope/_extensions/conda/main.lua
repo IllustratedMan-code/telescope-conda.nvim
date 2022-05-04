@@ -93,13 +93,15 @@ M.conda = function(opts)
 
 				-- print(vim.inspect(selection)) -- for debugging only
 				
-				local current_env_name = vim.env.CONDA_DEFAULT_ENV_NAME
-				local current_env_path = vim.env.CONDA_DEFAULT_ENV_PATH
+				local current_env_name = vim.env.CONDA_DEFAULT_ENV
+				local current_env_path = vim.env.CONDA_PREFIX
 
 				local next_env_name = selection["display"]
 				local next_env_path = selection['value']
-				vim.env.CONDA_DEFAULT_ENV_NAME = next_env_name
-				vim.env.CONDA_DEFAULT_ENV_PATH = next_env_path
+				vim.env.CONDA_DEFAULT_ENV = next_env_name
+				vim.env.CONDA_PREFIX = next_env_path.sub(-4)
+				vim.env.CONDA_PYTHON_EXE = next_env_path .. '/python'
+				vim.env.CONDA_PROMPT_MODIFIER = '(' .. next_env_name .. ')'
 				current_anaconda = env_to_bin(current_env_name, current_env_path)
 				next_anaconda = env_to_bin(next_env_name, next_env_path)
 
