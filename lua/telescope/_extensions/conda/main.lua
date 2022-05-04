@@ -71,17 +71,12 @@ M.conda = function(opts)
 		finder = conda_finder(),
 		sorter = conf.generic_sorter(opts),
 
-		-- TODO: There seems to be a bug if you immediately select the suggestion without moving first, that this one is not written into 
 		attach_mappings = function(prompt_bufnr, map)
 			actions.select_default:replace(function()
 				env_to_bin = function(env_name, env_path)
 					if env_name == "base" or not env_name then
 						return conda_path .. "/bin"
 					else
-						print('env_name')
-						print(env_name)
-						print('env_path')
-						print(env_path)
 						if env_path then
 							if string.sub(env_path, 1, -4) == '/bin' then
 								return env_path
@@ -110,7 +105,7 @@ M.conda = function(opts)
 
 				-- remove it and append it separately. Otherwise might have issues when no env in path in the beginning
 				vim.env.PATH = string.gsub(vim.env.PATH, current_anaconda .. '', '')
-				vim.env.PATH = current_anaconda .. ':' .. vim.env.PATH
+				vim.env.PATH = next_anaconda .. ':' .. vim.env.PATH
 			end)
 			return true
 		end,
