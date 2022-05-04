@@ -82,14 +82,13 @@ M.conda = function(opts)
 						print(env_name)
 						print('env_path')
 						print(env_path)
-						if not env_path then
-						    return conda_env_path .. '/' .. env_name .. '/bin'
-                        else
+						if env_path then
 							if string.strsub(env_path, 1, -4) == '/bin' then
 								return env_path
 							else
 								return env_path .. "/bin"
-							end
+                        else
+							return conda_env_path .. '/' .. env_name .. '/bin'
 						end
 					end
 				end
