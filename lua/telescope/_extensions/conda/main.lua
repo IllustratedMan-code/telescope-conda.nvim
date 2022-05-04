@@ -89,7 +89,7 @@ M.conda = function(opts)
 				next_anaconda = env_to_bin(next_env)
 				-- remove it and append it separately. Otherwise might have issues when no env in path in the beginning
 				vim.env.PATH = string.gsub(vim.env.PATH, current_anaconda, '')
-				vim.env.PATH = current_anaconda .. ':' .. vim.env.PATH:
+				vim.env.PATH = current_anaconda .. ':' .. vim.env.PATH
 			end)
 			return true
 		end,
