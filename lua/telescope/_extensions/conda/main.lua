@@ -87,6 +87,7 @@ M.conda = function(opts)
 								return env_path
 							else
 								return env_path .. "/bin"
+							end
                         else
 							return conda_env_path .. '/' .. env_name .. '/bin'
 						end
