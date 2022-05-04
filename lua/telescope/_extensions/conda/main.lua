@@ -81,7 +81,7 @@ M.conda = function(opts)
 						if env_path == nil then
 						    return conda_env_path .. '/' .. env_name .. '/bin'
                         else
-							if env_path:strsub(1, -4) == '/bin' then
+							if string.strsub(env_path, 1, -4) == '/bin' then
 								return env_path
 							else
 								return env_path .. "/bin"
