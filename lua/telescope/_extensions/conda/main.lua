@@ -74,21 +74,32 @@ M.conda = function(opts)
 		-- TODO: There seems to be a bug if you immediately select the suggestion without moving first, that this one is not written into 
 		attach_mappings = function(prompt_bufnr, map)
 			actions.select_default:replace(function()
-				env_to_bin = function(env)
-					if env == "base" or env == nil then
+				env_to_bin = function(env_name, env_path)
+					if (env_name == "base" or env_name == nil) and (env_path == conda_path or env_path == nil or string.strsub(env_path, 1, -4) == conda_path) then
 						return conda_path .. "/bin"
 					else
-						return conda_env_path .. "/" .. env .. "/bin"
+						if env_path:strsub(1, -4) == '/bin' then
+							return env_path
+						else
+						    return env_path .. "/bin"
+						end
 					end
 				end
 				actions.close(prompt_bufnr)
 				local selection = action_state.get_selected_entry()
-				print(vim.inspect(selection))
-				local current_env = vim.env.CONDA_DEFAULT_ENV
-				local next_env = selection["display"]
-				vim.env.CONDA_DEFAULT_ENV = next_env
-				current_anaconda = env_to_bin(current_env)
-				next_anaconda = env_to_bin(next_env)
+
+				-- print(vim.inspect(selection)) -- for debugging only
+				
+				local current_env_name = vim.env.CONDA_DEFAULT_ENV_NAME
+				local current_env_path = vim.env.CONDA_DEFAULT_ENV_PATH
+
+				local next_env_name = selection["display"]
+				local next_env_path = selection['value']
+				vim.env.CONDA_DEFAULT_ENV_NAME = next_env_name
+				vim.env.CONDA_DEFAULT_ENV_PATH = next_env_path
+				current_anaconda = env_to_bin(current_env_name, current_env_path)
+				next_anaconda = env_to_bin(next_env_name, next_env_path)
+
 				-- remove it and append it separately. Otherwise might have issues when no env in path in the beginning
 				vim.env.PATH = string.gsub(vim.env.PATH, current_anaconda .. '', '')
 				vim.env.PATH = current_anaconda .. ':' .. vim.env.PATH
