@@ -73,21 +73,41 @@ M.conda = function(opts)
 
 		attach_mappings = function(prompt_bufnr, map)
 			actions.select_default:replace(function()
-				env_to_bin = function(env)
-					if env == "base" then
+				env_to_bin = function(env_name, env_path)
+					if env_name == "base" or not env_name then
 						return conda_path .. "/bin"
 					else
-						return conda_env_path .. "/" .. env .. "/bin"
+						if env_path then
+							if string.sub(env_path, 1, -4) == '/bin' then
+								return env_path
+							else
+								return env_path .. "/bin"
+							end
+                        else
+							return conda_env_path .. '/' .. env_name .. '/bin'
+						end
 					end
 				end
 				actions.close(prompt_bufnr)
 				local selection = action_state.get_selected_entry()
-				local current_env = vim.env.CONDA_DEFAULT_ENV
-				local next_env = selection["display"]
-				vim.env.CONDA_DEFAULT_ENV = next_env
-				current_anaconda = env_to_bin(current_env)
-				next_anaconda = env_to_bin(next_env)
-				vim.env.PATH = string.gsub(vim.env.PATH, current_anaconda, next_anaconda)
+				
+				local current_env_name = vim.env.CONDA_DEFAULT_ENV
+				local current_env_path = vim.env.CONDA_PREFIX
+
+				local next_env_name = selection["display"]
+				local next_env_path = selection['value']
+				vim.env.CONDA_DEFAULT_ENV = next_env_name
+				
+				current_conda = env_to_bin(current_env_name, current_env_path)
+				next_conda = env_to_bin(next_env_name, next_env_path)
+				-- remove '/bin' for prefix
+				vim.env.CONDA_PREFIX = next_conda:sub(1, -5)
+				vim.env.CONDA_PYTHON_EXE = next_conda .. '/python'
+				vim.env.CONDA_PROMPT_MODIFIER = '(' .. next_env_name .. ')'
+
+				-- remove it and append it separately. Otherwise might have issues when no env in path in the beginning
+				vim.env.PATH = string.gsub(vim.env.PATH, current_conda .. '', '')
+				vim.env.PATH = next_conda .. ':' .. vim.env.PATH
 			end)
 			return true
 		end,
