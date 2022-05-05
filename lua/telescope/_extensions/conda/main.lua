@@ -90,8 +90,6 @@ M.conda = function(opts)
 				end
 				actions.close(prompt_bufnr)
 				local selection = action_state.get_selected_entry()
-
-				-- print(vim.inspect(selection)) -- for debugging only
 				
 				local current_env_name = vim.env.CONDA_DEFAULT_ENV
 				local current_env_path = vim.env.CONDA_PREFIX
