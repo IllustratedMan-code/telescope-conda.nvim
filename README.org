@@ -17,7 +17,7 @@ use {'nvim-telescope/telescope.nvim',
 #+begin_src lua
 require('telescope').setup {
 	extensions = {
-		conda = {home = "/path/to/directory/"}
+		conda = {anaconda_path = "/path/to/directory/"}
 			}
 }
 #+end_src
